@@ -1,16 +1,12 @@
-import flask
-from flask import request, jsonify
+from fastapi import FastAPI
+app = FastAPI()
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-
-
-@app.route('/', methods=['GET'])
+@app.get('/')
 def home():
     return 'Hello and welcome to the HarpNet API revision 3.0 </p>'
 
 
-@app.route('/game/check/pubtoken', methods=['GET'])  # Why do we even have this?
+@app.route('/game/check/pubtoken')  # Why do we even have this?
 def check_pubtoken():
     game_id = request.args.get('id')  # Get game ID | 1 = Carmine
     pubtoken = request.args.get('token')
@@ -33,51 +29,48 @@ def check_pubtoken():
     return default_response
 
 
-@app.route('/game/get/tags', methods=['GET'])
-def get_tags():
-    game_id = request.args.get('id')  # Get game ID | 1 = Carmine
-    username = request.args.get('name')
+@app.get('/game/get/tags')
+def get_tags(id, name):
 
-    default_response = jsonify(
-        status=69,
-        message='Default option - game ID or username not specified or invalid'
-    )
+    default_response = {
+        status: 69,
+        message: 'Default option - game ID or username not specified or invalid'
+    }
 
-    carmine_response = jsonify(
-        status=0,
-        message="HNAPIv3",
-        tags=[{'tag': 'speedy boi', 'color': "piss yellow"}]
-    )
+    carmine_response = {
+        status: 0,
+        message: "HNAPIv3",
+        tags: [{'tag': 'speedy boi', 'color': "piss yellow"}]
+    }
 
-    if game_id == "1" and username:
+    if id == "1" and name:
         return carmine_response
 
     return default_response
 
 
-@app.route('/game/get/userinfo', methods=['GET'])  # This is dumb and legacy, please fix
-def get_userinfo():
-    game_id = request.args.get('id')  # Get game ID | 1 = Carmine
+@app.get('/game/get/userinfo')  # This is dumb and legacy, please  fix
+def get_userinfo(id):
 
-    default_response = jsonify(
-        status=69,
-        message='Default option - game ID not specified or invalid'
-    )
+    default_response = {
+        "status": 69,
+        "message": 'Default option - game ID not specified or invalid'
+    }
 
-    carmine_response = jsonify(
-        status=0,
-        message="HNAPIv3",
-        username="test",
-        public="tits"
-    )
+    carmine_response = {
+        "status": 0,
+        "message": "HNAPIv3",
+        "username": "test",
+        "public": "tits"
+    }
 
-    if game_id == "1":
+    if id == "1":
         return carmine_response
 
     return default_response
 
 
-@app.route('/game/get/user', methods=['GET'])  # This is dumb and legacy, please fix
+@app.get('/game/get/user')  # This is dumb and legacy, please fix
 def get_user():
     game_id = request.args.get('id')  # Get game ID | 1 = Carmine
     token = request.args.get('token')
@@ -104,4 +97,4 @@ def get_user():
 #def get_user():
 #    return
 
-app.run(port=80)
+
