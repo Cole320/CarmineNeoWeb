@@ -10,15 +10,15 @@ def home():
 def check_pubtoken(id, token):
 
     default_response = {
-        "status"=69,
-        "message"='Default option - Public token not specified or invalid'
+        "status": 69,
+        "message": 'Default option - Public token not specified or invalid'
     }
 
     carmine_response = {
-        "status"=0,
-        "message"='Public token is valid',
-        "username"='test',
-        "public"='test'
+        "status": 0,
+        "message": 'Public token is valid',
+        "username": 'test',
+        "public": 'test'
     }
 
     if id == "1":
@@ -72,15 +72,15 @@ def get_userinfo(id):
 def get_user(id, token):
 
     default_response = {
-        "status"=69,
-        "message"='Default option - game ID not specified or invalid'
+        "status": 69,
+        "message": 'Default option - game ID not specified or invalid'
     }    
 
     carmine_response = {
-        "status"=0,
-        "message"="HNAPIv3",
-        "username"="test",
-        "public"="tits"
+        "status": 0,
+        "message": "HNAPIv3",
+        "username": "test",
+        "public": "tits"
     }
 
     if id == "1":
