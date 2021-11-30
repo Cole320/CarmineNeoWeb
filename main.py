@@ -6,7 +6,7 @@ def home():
     return 'Hello and welcome to the HarpNet API revision 3.0 </p>'
 
 
-@app.route('/game/check/pubtoken')  # Why do we even have this?
+@app.get('/game/check/pubtoken')  # Why do we even have this?
 def check_pubtoken(id, token):
 
     default_response = {
